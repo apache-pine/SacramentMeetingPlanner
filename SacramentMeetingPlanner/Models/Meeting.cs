@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SacramentMeetingPlanner.Models
 {
@@ -6,8 +7,8 @@ namespace SacramentMeetingPlanner.Models
     {
         public Meeting()
         {
-            this.Talks = new HashSet<Talk>();
-            this.Hymns = new HashSet<Hymn>();
+            this.Talks = new List<Talk>();
+            this.Hymns = new List<Hymn>();
         }
 
         public int MeetingId { get; set; }
@@ -23,7 +24,10 @@ namespace SacramentMeetingPlanner.Models
 
         public string Benediction { get; set; }
 
-        public virtual ICollection<Talk> Talks { get; set; }
-        public virtual ICollection<Hymn> Hymns { get; set; }
+        [ForeignKey("MeetingId")]
+        public List<Talk> Talks { get; set; }
+
+        [ForeignKey("MeetingId")]
+        public List<Hymn> Hymns { get; set; }
     }
 }

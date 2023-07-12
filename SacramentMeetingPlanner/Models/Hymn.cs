@@ -6,9 +6,9 @@ namespace SacramentMeetingPlanner.Models
     {
         public int HymnId { get; set; }
 
-        public string HymnName { get; set; }
+        public string? HymnName { get; set; }
 
-        public string HymnType { get; set; }
+        public string? HymnType { get; set; }
 
         [Range(0, 400)]
         public int? HymnPage { get; set; }

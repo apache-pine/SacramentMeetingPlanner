@@ -14,8 +14,21 @@ namespace SacramentMeetingPlanner.Data
         {
         }
 
-        public DbSet<SacramentMeetingPlanner.Models.Meeting> Meeting { get; set; } = default!;
-        public DbSet<SacramentMeetingPlanner.Models.Hymn> Hymn { get; set; } = default!;
-        public DbSet<SacramentMeetingPlanner.Models.Talk> Talk { get; set; } = default!;
+        public DbSet<SacramentMeetingPlanner.Models.Meeting> Meeting { get; set; }
+        public DbSet<SacramentMeetingPlanner.Models.Hymn> Hymn { get; set; }
+        public DbSet<SacramentMeetingPlanner.Models.Talk> Talk { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Hymn>()
+                .HasOne(c => c.Meeting)
+                .WithMany(p => p.Hymns)
+                .HasForeignKey(h => h.MeetingId);
+
+            modelBuilder.Entity<Talk>()
+                .HasOne(c => c.Meeting)
+                .WithMany(p => p.Talks)
+                .HasForeignKey(h => h.MeetingId);
+        }
     }
 }

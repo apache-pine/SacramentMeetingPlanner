@@ -166,90 +166,16 @@ namespace SacramentMeetingPlanner.Controllers
         // POST: Meetings/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,
-            [Bind("MeetingId,MeetingDate,Presiding,Conducting,Invocation,Benediction,Talks[0].SpeakerName,Talks[0].Topic,Talks[0].TalkType,Hymns[0].HymnName,Hymns[0].HymnType,Hymns[0].HymnPage")] Meeting meeting)
+        public async Task<IActionResult> Edit(int id, Meeting meeting)
         {
             if (id != meeting.MeetingId)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
                 try
                 {
-                    // Fetch the existing meeting from the database.
-                    var existingMeeting = await _context.Meeting
-                        .Include(m => m.Talks)
-                        .Include(m => m.Hymns)
-                        .FirstOrDefaultAsync(m => m.MeetingId == id);
+                    _context.Update(meeting);
 
-                    // Copy the simple properties.
-                    existingMeeting.MeetingDate = meeting.MeetingDate;
-                    existingMeeting.Presiding = meeting.Presiding;
-                    existingMeeting.Conducting = meeting.Conducting;
-                    existingMeeting.Invocation = meeting.Invocation;
-                    existingMeeting.Benediction = meeting.Benediction;
-
-                    // Update the Talks
-                    for (int i = 0; i < 5; i++)
-                    {
-                        var speakerName = Request.Form[$"Talks[{i}].SpeakerName"];
-                        var topic = Request.Form[$"Talks[{i}].Topic"];
-                        var talkType = Request.Form[$"Talks[{i}].TalkType"];
-
-                        if (!string.IsNullOrEmpty(speakerName) && !string.IsNullOrEmpty(topic) && !string.IsNullOrEmpty(talkType))
-                        {
-                            var existingTalk = existingMeeting.Talks.FirstOrDefault(t => t.SpeakerName == speakerName);
-                            if (existingTalk != null)
-                            {
-                                // Update the existing talk
-                                existingTalk.Topic = topic;
-                                existingTalk.TalkType = talkType;
-                            }
-                            else
-                            {
-                                // Add a new talk
-                                existingMeeting.Talks.Add(new Talk
-                                {
-                                    SpeakerName = speakerName,
-                                    Topic = topic,
-                                    TalkType = talkType
-                                });
-                            }
-                        }
-                    }
-
-                    // Do similar for Hymns
-                    for (int i = 0; i < 5; i++)
-                    {
-                        var hymnName = Request.Form[$"Hymns[{i}].HymnName"];
-                        var hymnPage = Request.Form[$"Hymns[{i}].HymnPage"];
-                        var hymnType = Request.Form[$"Hymns[{i}].HymnType"];
-
-                        if (!string.IsNullOrEmpty(hymnName) && !string.IsNullOrEmpty(hymnPage) && !string.IsNullOrEmpty(hymnType))
-                        {
-                            var existingHymn = existingMeeting.Hymns.FirstOrDefault(h => h.HymnName == hymnName);
-                            if (existingHymn != null)
-                            {
-                                // Update the existing hymn
-                                existingHymn.HymnPage = string.IsNullOrEmpty(hymnPage) ? null : (int?)int.Parse(hymnPage);
-                                existingHymn.HymnType = hymnType;
-                            }
-                            else
-                            {
-                                // Add a new hymn
-                                existingMeeting.Hymns.Add(new Hymn
-                                {
-                                    HymnName = hymnName,
-                                    HymnPage = string.IsNullOrEmpty(hymnPage) ? null : (int?)int.Parse(hymnPage),
-                                    HymnType = hymnType
-                                });
-                            }
-                        }
-                    }
-
-                    _context.Update(existingMeeting);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -264,7 +190,6 @@ namespace SacramentMeetingPlanner.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
             return View(meeting);
         }
 
