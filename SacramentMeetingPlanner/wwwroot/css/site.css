@@ -84,6 +84,7 @@ h1, h2, h3, h4, h5, h6 {
 
 label {
     padding-top: 1rem;
+    font-weight: 600;
 }
 
 thead {
@@ -124,3 +125,18 @@ dd {
 .btn-danger:hover {
     background-color: darkred;
 }
+
+.home-p {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.back-btn {
+    background-color: var(--accent1-color)
+}
+
+.back-btn:hover {
+    background-color: #0d6efd;
+}
+
