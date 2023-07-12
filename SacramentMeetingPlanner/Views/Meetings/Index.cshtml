@@ -7,7 +7,7 @@
 <h1>Planner</h1>
 
 <p>
-    <a asp-action="Create">Create New Meeting</a>
+    <a class="btn" asp-action="Create">Create New Meeting</a>
 </p>
 
 <hr />
@@ -27,7 +27,7 @@
             <option value="">All</option>
         </select>
 
-        Conducting: <input type="text" asp-for="SearchString" />
+        Conducting: <input type="text" asp-for="SearchString" onclick="this.select();" />
         <input class="btn" type="submit" value="Filter and Sort" />
     </p>
 </form>
