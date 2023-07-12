@@ -1,0 +1,125 @@
+﻿@model SacramentMeetingPlanner.Models.Meeting
+
+@{
+    ViewData["Title"] = "Create Agenda";
+}
+
+<h1>Create Sacrament Meeting Agenda</h1>
+
+<h4>Meeting Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MeetingDate" class="control-label"></label>
+                <input asp-for="MeetingDate" class="form-control" />
+                <span asp-validation-for="MeetingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Presiding" class="control-label"></label>
+                <input asp-for="Presiding" class="form-control" />
+                <span asp-validation-for="Presiding" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Conducting" class="control-label"></label>
+                <input asp-for="Conducting" class="form-control" />
+                <span asp-validation-for="Conducting" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Opening Hymn Name</label>
+                <input name="Hymns[0].HymnName" class="form-control" />
+                <label class="control-label">Opening Hymn Page Number</label>
+                <input type ="number" name="Hymns[0].HymnPage" class="form-control" />
+                <input name="Hymns[0].HymnType" class="form-control" value="Opening" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Invocation" class="control-label"></label>
+                <input asp-for="Invocation" class="form-control" />
+                <span asp-validation-for="Invocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Sacrament Hymn Name</label>
+                <input name="Hymns[1].HymnName" class="form-control" />
+                <label class="control-label">Sacrament Hymn Page Number</label>
+                <input type="number" name="Hymns[1].HymnPage" class="form-control" />
+                <input name="Hymns[1].HymnType" class="form-control" value="Sacrament" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Article of Faith 1 Speaker Name</label>
+                <input name="Talks[0].SpeakerName" class="form-control" />
+                <input name="Talks[0].Topic" class="form-control" value="Article of Faith" type="hidden"/>
+                <input name="Talks[0].TalkType" class="form-control" value="AoF1" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Article of Faith 2 Speaker Name</label>
+                <input name="Talks[1].SpeakerName" class="form-control" />
+                <input name="Talks[1].Topic" class="form-control" value="Article of Faith" type="hidden" />
+                <input name="Talks[1].TalkType" class="form-control" value="AoF2" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Youth Speaker Name</label>
+                <input name="Talks[2].SpeakerName" class="form-control" />
+                <label class="control-label">Youth Speaker Topic</label>
+                <input name="Talks[2].Topic" class="form-control" />
+                <input name="Talks[2].TalkType" class="form-control" value="Youth" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">First Speaker Name</label>
+                <input name="Talks[3].SpeakerName" class="form-control" />
+                <label class="control-label">First Speaker Topic</label>
+                <input name="Talks[3].Topic" class="form-control" />
+                <input name="Talks[3].TalkType" class="form-control" value="First" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Intermediate Hymn or Special Musical Number</label>
+                <div>
+                    <label><input type="radio" name="Hymns[2].HymnType" value="Intermediate" /> Intermediate Hymn</label>
+                    <label><input type="radio" name="Hymns[2].HymnType" value="Special Musical Number" /> Special Musical Number</label>
+                </div>
+                <label class="control-label">Intermediate Hymn Name or Special Musical Number Performer</label>
+                <input name="Hymns[2].HymnName" class="form-control" />
+                <label class="control-label">Intermediate Hymn Page Number (Leave blank for Special Musical Number)</label>
+                <input type="number" name="Hymns[2].HymnPage" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Second Speaker Name</label>
+                <input name="Talks[4].SpeakerName" class="form-control" />
+                <label class="control-label">Second Speaker Topic</label>
+                <input name="Talks[4].Topic" class="form-control" />
+                <input name="Talks[4].TalkType" class="form-control" value="Second" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Closing Hymn Name</label>
+                <input name="Hymns[3].HymnName" class="form-control" />
+                <label class="control-label">Closing Hymn Page Number</label>
+                <input type="number" name="Hymns[3].HymnPage" class="form-control" />
+                <input name="Hymns[3].HymnType" class="form-control" value="Closing" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Benediction" class="control-label"></label>
+                <input asp-for="Benediction" class="form-control" />
+                <span asp-validation-for="Benediction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Dismissal Song Name</label>
+                <input name="Hymns[4].HymnName" class="form-control" />
+                <label class="control-label">Dismissal Song Page Number</label>
+                <input type="number" name="Hymns[4].HymnPage" class="form-control" />
+                <input name="Hymns[4].HymnType" class="form-control" value="Dismissal" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

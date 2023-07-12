@@ -1,0 +1,102 @@
+﻿@model SacramentMeetingPlanner.Models.MeetingPresidingViewModel
+
+@{
+    ViewData["Title"] = "Planner";
+}
+
+<h1>Planner</h1>
+
+<p>
+    <a asp-action="Create">Create New Meeting</a>
+</p>
+
+<hr />
+
+<form asp-controller="Meetings" asp-action"Index" method="get">
+    <p>
+        Sort By:
+        <select asp-for"SortBy" name="sortBy">
+            <option value="MeetingDateAsc">Meeting Date (Ascending)</option>
+            <option value="MeetingDateDesc">Meeting Date (Descending)</option>
+        </select>
+        <input type="hidden" asp-for="SortOrder" value="@ViewData["SortOrder"]" />
+    </p>
+    <p>
+        Presiding:
+        <select asp-for="MeetingPresiding" asp-items="Model.Presidings">
+            <option value="">All</option>
+        </select>
+
+        Conducting: <input type="text" asp-for="SearchString" />
+        <input class="btn" type="submit" value="Filter and Sort" />
+    </p>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Meetings![0].MeetingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meetings![0].Presiding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meetings![0].Conducting)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meetings![0].Invocation)
+            </th>
+            <th>
+                Youth Speaker
+            </th>
+            <th>
+                First Speaker
+            </th>
+            <th>
+                Second Speaker
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meetings![0].Benediction)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Meetings!)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Presiding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Conducting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Invocation)
+            </td>
+            <td>
+                @item.Talks.FirstOrDefault(t => t.TalkType == "Youth")?.SpeakerName
+            </td>
+            <td>
+                @item.Talks.FirstOrDefault(t => t.TalkType == "First")?.SpeakerName
+            </td>
+            <td>
+                @item.Talks.FirstOrDefault(t => t.TalkType == "Second")?.SpeakerName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Benediction)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MeetingId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MeetingId">Agenda</a> |
+                <a asp-action="Delete" asp-route-id="@item.MeetingId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

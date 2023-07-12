@@ -1,0 +1,135 @@
+﻿@model SacramentMeetingPlanner.Models.Meeting
+
+@{
+    ViewData["Title"] = "Agenda";
+}
+
+@{
+    var intermediateHymn = Model.Hymns.FirstOrDefault(h => h.HymnType == "Intermediate" || h.HymnType == "Special Musical Number");
+    string dtText = intermediateHymn != null && intermediateHymn.HymnType == "Intermediate" ? "Intermediate Hymn" : "Special Musical Number";
+}
+
+<h1>Sacrament Meeting Agenda</h1>
+
+<div>
+    <h4>Meeting Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MeetingDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MeetingDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Presiding)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Presiding)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Conducting)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Conducting)
+        </dd>
+        <dt class="col-sm-2">
+            Opening Hymn
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var openingHymn = Model.Hymns.FirstOrDefault(h => h.HymnType == "Opening");
+            }
+            @(openingHymn?.HymnName + " - Page " + openingHymn?.HymnPage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Invocation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Invocation)
+        </dd>
+        <dt class="col-sm-2">
+            Sacrament Hymn
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var sacramentHymn = Model.Hymns.FirstOrDefault(h => h.HymnType == "Sacrament");
+            }
+            @(sacramentHymn?.HymnName + " - Page " + sacramentHymn?.HymnPage)
+        </dd>
+        <dt class="col-sm-2">
+            Article of Faith 1
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Talks.FirstOrDefault(t => t.TalkType == "AoF1").SpeakerName)
+        </dd>
+        <dt class="col-sm-2">
+            Article of Faith 2
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Talks.FirstOrDefault(t => t.TalkType == "AoF2").SpeakerName)
+        </dd>
+        <dt class="col-sm-2">
+            Youth Speaker
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Talks.FirstOrDefault(t => t.TalkType == "Youth").SpeakerName)
+        </dd>
+        <dt class="col-sm-2">
+            First Speaker
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Talks.FirstOrDefault(t => t.TalkType == "First").SpeakerName)
+        </dd>
+        <dt class="col-sm-2">
+            @dtText
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var hymnDetails = Model.Hymns.FirstOrDefault(h => h.HymnType == "Intermediate" || h.HymnType == "Special Musical Number");
+            }
+            @if (hymnDetails?.HymnPage != null)
+            {
+                @: @(hymnDetails?.HymnName + " - Page " + hymnDetails?.HymnPage)
+            }
+            else
+            {
+                @: @(hymnDetails?.HymnName)
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Second Speaker
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Talks.FirstOrDefault(t => t.TalkType == "Second").SpeakerName)
+        </dd>
+        <dt class="col-sm-2">
+            Closing Hymn
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var closingHymn = Model.Hymns.FirstOrDefault(h => h.HymnType == "Closing");
+            }
+            @(closingHymn?.HymnName + " - Page " + closingHymn?.HymnPage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Benediction)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Benediction)
+        </dd>
+        <dt class="col-sm-2">
+            Dismissal Song
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var dismissalHymn = Model.Hymns.FirstOrDefault(h => h.HymnType == "Dismissal");
+            }
+            @(dismissalHymn?.HymnName + " - Page " + dismissalHymn?.HymnPage)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.MeetingId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
