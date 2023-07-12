@@ -16,12 +16,16 @@ namespace SacramentMeetingPlanner.Models
         [Display(Name = "Meeting Date"), DataType(DataType.Date)]
         public DateTime MeetingDate { get; set; }
 
+        [StringLength(60, MinimumLength = 3)]
         public string Presiding { get; set; }
 
+        [StringLength(60, MinimumLength = 3)]
         public string Conducting { get; set; }
 
+        [StringLength(60, MinimumLength = 3)]
         public string Invocation { get; set; }
 
+        [StringLength(60, MinimumLength = 3)]
         public string Benediction { get; set; }
 
         [ForeignKey("MeetingId")]

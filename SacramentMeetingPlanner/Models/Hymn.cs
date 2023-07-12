@@ -6,6 +6,7 @@ namespace SacramentMeetingPlanner.Models
     {
         public int HymnId { get; set; }
 
+        [StringLength(60, MinimumLength = 3)]
         public string? HymnName { get; set; }
 
         public string? HymnType { get; set; }
