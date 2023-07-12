@@ -12,7 +12,7 @@ using SacramentMeetingPlanner.Data;
 namespace SacramentMeetingPlanner.Migrations
 {
     [DbContext(typeof(SacramentMeetingPlannerContext))]
-    [Migration("20230711231127_InitialCreate")]
+    [Migration("20230712224316_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -34,17 +34,15 @@ namespace SacramentMeetingPlanner.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HymnId"));
 
                     b.Property<string>("HymnName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HymnPage")
+                    b.Property<int?>("HymnPage")
                         .HasColumnType("int");
 
                     b.Property<string>("HymnType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MeetingId")
+                    b.Property<int>("MeetingId")
                         .HasColumnType("int");
 
                     b.HasKey("HymnId");
@@ -98,15 +96,12 @@ namespace SacramentMeetingPlanner.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SpeakerName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TalkType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Topic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TalkId");
@@ -118,9 +113,13 @@ namespace SacramentMeetingPlanner.Migrations
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Hymn", b =>
                 {
-                    b.HasOne("SacramentMeetingPlanner.Models.Meeting", null)
+                    b.HasOne("SacramentMeetingPlanner.Models.Meeting", "Meeting")
                         .WithMany("Hymns")
-                        .HasForeignKey("MeetingId");
+                        .HasForeignKey("MeetingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Meeting");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Talk", b =>

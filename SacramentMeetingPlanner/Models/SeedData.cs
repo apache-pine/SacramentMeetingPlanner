@@ -19,7 +19,9 @@ namespace SacramentMeetingPlanner.Models
                 {
                     return; // DB has been seeded
                 }
-                context.Meeting.AddRange(
+
+                var meetings = new[]
+                {
                     new Meeting
                     {
                         MeetingDate = DateTime.Parse("2023-04-02"),
@@ -60,16 +62,19 @@ namespace SacramentMeetingPlanner.Models
                         Invocation = "Brother Benedict",
                         Benediction = "Brother Sanders"
                     }
-                );
+                };
+
+                context.Meeting.AddRange(meetings);
                 context.SaveChanges();
 
-                context.Hymn.AddRange(
+                var hymns = new[]
+                {
                     new Hymn
                     {
                         HymnName = "The Morning Breaks",
                         HymnType = "Opening",
                         HymnPage = 1,
-                        MeetingId = 1
+                        Meeting = meetings[0]
 
                     },
                     new Hymn
@@ -77,7 +82,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "The Spirit of God",
                         HymnType = "Sacrament",
                         HymnPage = 2,
-                        MeetingId = 1
+                        Meeting = meetings[0]
 
                     },
                     new Hymn
@@ -85,7 +90,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Ward Choir",
                         HymnType = "Special Musical Number",
                         HymnPage = null,
-                        MeetingId = 1
+                        Meeting = meetings[0]
 
                     },
                     new Hymn
@@ -93,7 +98,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Now Let Us Rejoice",
                         HymnType = "Closing",
                         HymnPage = 3,
-                        MeetingId = 1
+                        Meeting = meetings[0]
 
                     },
                     new Hymn
@@ -101,7 +106,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Truth Eternal",
                         HymnType = "Dismissal",
                         HymnPage = 4,
-                        MeetingId = 1
+                        Meeting = meetings[0]
 
                     },
                     new Hymn
@@ -109,7 +114,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "High on the Mountain Top",
                         HymnType = "Opening",
                         HymnPage = 5,
-                        MeetingId = 2
+                        Meeting = meetings[1]
 
                     },
                     new Hymn
@@ -117,7 +122,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Redeemer of Israel",
                         HymnType = "Sacrament",
                         HymnPage = 6,
-                        MeetingId = 2
+                        Meeting = meetings[1]
 
                     },
                     new Hymn
@@ -125,7 +130,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Israel, Israel, God is Calling",
                         HymnType = "Intermediate",
                         HymnPage = 7,
-                        MeetingId = 2
+                        Meeting = meetings[1]
 
                     },
                     new Hymn
@@ -133,7 +138,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Awake and Arise",
                         HymnType = "Closing",
                         HymnPage = 8,
-                        MeetingId = 2
+                        Meeting = meetings[1]
 
                     },
                     new Hymn
@@ -141,7 +146,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Come, Rejoice",
                         HymnType = "Dismissal",
                         HymnPage = 9,
-                        MeetingId = 2
+                        Meeting = meetings[1]
 
                     },
                     new Hymn
@@ -149,7 +154,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Come, Sing to the Lord",
                         HymnType = "Opening",
                         HymnPage = 10,
-                        MeetingId = 3
+                        Meeting = meetings[2]
 
                     },
                     new Hymn
@@ -157,7 +162,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "What Was Witnessed in the Heavens?",
                         HymnType = "Sacrament",
                         HymnPage = 11,
-                        MeetingId = 3
+                        Meeting = meetings[2]
 
                     },
                     new Hymn
@@ -165,7 +170,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Ward Choir",
                         HymnType = "Special Musical Number",
                         HymnPage = null,
-                        MeetingId = 3
+                        Meeting = meetings[2]
 
                     },
                     new Hymn
@@ -173,7 +178,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "An Angel from on High",
                         HymnType = "Closing",
                         HymnPage = 13,
-                        MeetingId = 3
+                        Meeting = meetings[2]
 
                     },
                     new Hymn
@@ -181,7 +186,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Sweet Is the Peace the Gospel Brings",
                         HymnType = "Dismissal",
                         HymnPage = 14,
-                        MeetingId = 3
+                        Meeting = meetings[2]
 
                     },
                     new Hymn
@@ -189,7 +194,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "What Glorious Scenes Mine Eyes Behold",
                         HymnType = "Opening",
                         HymnPage = 16,
-                        MeetingId = 4
+                        Meeting = meetings[3]
 
                     },
                     new Hymn
@@ -197,7 +202,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Awake, Ye Saints of God, Awake",
                         HymnType = "Sacrament",
                         HymnPage = 17,
-                        MeetingId = 4
+                        Meeting = meetings[3]
 
                     },
                     new Hymn
@@ -205,7 +210,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "The Voice of God Again is Heard",
                         HymnType = "Intermediate",
                         HymnPage = 18,
-                        MeetingId = 4
+                        Meeting = meetings[3]
 
                     },
                     new Hymn
@@ -213,7 +218,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "We Thank Thee, O God, for a Prophet",
                         HymnType = "Closing",
                         HymnPage = 19,
-                        MeetingId = 4
+                        Meeting = meetings[3]
 
                     },
                     new Hymn
@@ -221,7 +226,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "God of Power, God of Right",
                         HymnType = "Dismissal",
                         HymnPage = 20,
-                        MeetingId = 4
+                        Meeting = meetings[3]
 
                     },
                     new Hymn
@@ -229,7 +234,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Come, Listen to a Prophet's Voice",
                         HymnType = "Opening",
                         HymnPage = 21,
-                        MeetingId = 5
+                        Meeting = meetings[4]
 
                     },
                     new Hymn
@@ -237,7 +242,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "We listen to a Prophet's Voice",
                         HymnType = "Sacrament",
                         HymnPage = 22,
-                        MeetingId = 5
+                        Meeting = meetings[4]
 
                     },
                     new Hymn
@@ -245,7 +250,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "Ward Choir",
                         HymnType = "Special Musical Number",
                         HymnPage = null,
-                        MeetingId = 5
+                        Meeting = meetings[4]
 
                     },
                     new Hymn
@@ -253,7 +258,7 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "We Ever Pray for Thee",
                         HymnType = "Closing",
                         HymnPage = 23,
-                        MeetingId = 5
+                        Meeting = meetings[4]
 
                     },
                     new Hymn
@@ -261,189 +266,195 @@ namespace SacramentMeetingPlanner.Models
                         HymnName = "God Bless Our Prophet Dear",
                         HymnType = "Dismissal",
                         HymnPage = 24,
-                        MeetingId = 5
+                        Meeting = meetings[4]
 
                     }
-                );
+                };
+                context.Hymn.AddRange(hymns);
+                context.SaveChanges();
 
-                context.Talk.AddRange(
+
+                var talks = new[]
+                {
                     new Talk
                     {
-                        MeetingId = 1,
                         TalkType = "Youth",
                         SpeakerName = "Kevin Johnson",
-                        Topic = "Jesus Christ"
+                        Topic = "Jesus Christ",
+                        Meeting = meetings[0]
                     },
                     new Talk
                     {
-                        MeetingId = 1,
+
                         TalkType = "First",
                         SpeakerName = "Manny Johnson",
-                        Topic = "Holy Ghost"
+                        Topic = "Holy Ghost",
+                        Meeting = meetings[0]
                     },
                     new Talk
                     {
-                        MeetingId = 1,
                         TalkType = "Second",
                         SpeakerName = "Kristin Johnson",
-                        Topic = "Heavenly Parents"
+                        Topic = "Heavenly Parents",
+                        Meeting = meetings[0]
                     },
                     new Talk
                     {
-                        MeetingId = 1,
                         TalkType = "AoF1",
                         SpeakerName = "Josh Jessen",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[0]
                     },
                     new Talk
                     {
-                        MeetingId = 1,
                         TalkType = "AoF2",
                         SpeakerName = "Ben Lemmon",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[0]
                     },
                     new Talk
                     {
-                        MeetingId = 2,
                         TalkType = "Youth",
                         SpeakerName = "Jonathan Hernandez",
-                        Topic = "Blessings"
+                        Topic = "Blessings",
+                        Meeting = meetings[1]
                     },
                     new Talk
                     {
-                        MeetingId = 2,
                         TalkType = "First",
                         SpeakerName = "Jesus Hernandez",
-                        Topic = "Tithing"
+                        Topic = "Tithing",
+                        Meeting = meetings[1]
                     },
                     new Talk
                     {
-                        MeetingId = 2,
                         TalkType = "Second",
                         SpeakerName = "Maria Hernandez",
-                        Topic = "Commandments"
+                        Topic = "Commandments",
+                        Meeting = meetings[1]
                     },
                     new Talk
                     {
-                        MeetingId = 2,
                         TalkType = "AoF1",
                         SpeakerName = "Verdus Miles",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[1]
                     },
                     new Talk
                     {
-                        MeetingId = 2,
                         TalkType = "AoF2",
                         SpeakerName = "Delanee Theener",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[1]
                     },
                     new Talk
                     {
-                        MeetingId = 3,
                         TalkType = "Youth",
                         SpeakerName = "Jessica Smith",
-                        Topic = "Prophets"
+                        Topic = "Prophets",
+                        Meeting = meetings[2]
                     },
                     new Talk
                     {
-                        MeetingId = 3,
                         TalkType = "First",
                         SpeakerName = "Tiffany Smith",
-                        Topic = "Following The Spirit"
+                        Topic = "Following The Spirit",
+                        Meeting = meetings[2]
                     },
                     new Talk
                     {
-                        MeetingId = 3,
                         TalkType = "Second",
                         SpeakerName = "Jeffery Smith",
-                        Topic = "Worthiness"
+                        Topic = "Worthiness",
+                        Meeting = meetings[2]
                     },
                     new Talk
                     {
-                        MeetingId = 3,
                         TalkType = "AoF1",
                         SpeakerName = "Coy Lawton",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[2]
                     },
                     new Talk
                     {
-                        MeetingId = 3,
                         TalkType = "AoF2",
                         SpeakerName = "Colt Duncan",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[2]
                     },
                     new Talk
                     {
-                        MeetingId = 4,
                         TalkType = "Youth",
                         SpeakerName = "Jenny Lopez",
-                        Topic = "Obedience"
+                        Topic = "Obedience",
+                        Meeting = meetings[3]
                     },
                     new Talk
                     {
-                        MeetingId = 4,
                         TalkType = "First",
                         SpeakerName = "Ally Lopez",
-                        Topic = "Sabbath Day"
+                        Topic = "Sabbath Day",
+                        Meeting = meetings[3]
                     },
                     new Talk
                     {
-                        MeetingId = 4,
                         TalkType = "Second",
                         SpeakerName = "Samuel Lopez",
-                        Topic = "Temples"
+                        Topic = "Temples",
+                        Meeting = meetings[3]
                     },
                     new Talk
                     {
-                        MeetingId = 4,
                         TalkType = "AoF1",
                         SpeakerName = "Donald Miles",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[3]
                     },
                     new Talk
                     {
-                        MeetingId = 4,
                         TalkType = "AoF2",
                         SpeakerName = "Randy Brotherson",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[3]
                     },
                     new Talk
                     {
-                        MeetingId = 5,
                         TalkType = "Youth",
                         SpeakerName = "Christopher Jones",
-                        Topic = "General Conference"
+                        Topic = "General Conference",
+                        Meeting = meetings[4]
                     },
                     new Talk
                     {
-                        MeetingId = 5,
                         TalkType = "First",
                         SpeakerName = "Samantha Jones",
-                        Topic = "Book of Mormon"
+                        Topic = "Book of Mormon",
+                        Meeting = meetings[4]
                     },
                     new Talk
                     {
-                        MeetingId = 5,
                         TalkType = "Second",
                         SpeakerName = "Kyle Jones",
-                        Topic = "Journaling"
+                        Topic = "Journaling",
+                        Meeting = meetings[4]
                     },
                     new Talk
                     {
-                        MeetingId = 5,
                         TalkType = "AoF1",
                         SpeakerName = "Brent Holgate",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[4]
                     },
                     new Talk
                     {
-                        MeetingId = 5,
                         TalkType = "AoF2",
                         SpeakerName = "Kenny Benson",
-                        Topic = "Article of Faith"
+                        Topic = "Article of Faith",
+                        Meeting = meetings[4]
                     }
-                );
+                };
 
+                context.Talk.AddRange(talks);
                 context.SaveChanges();
             }
         }

@@ -34,10 +34,10 @@ namespace SacramentMeetingPlanner.Migrations
                 {
                     HymnId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HymnName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HymnType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HymnPage = table.Column<int>(type: "int", nullable: false),
-                    MeetingId = table.Column<int>(type: "int", nullable: true)
+                    HymnName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HymnType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HymnPage = table.Column<int>(type: "int", nullable: true),
+                    MeetingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,7 +46,8 @@ namespace SacramentMeetingPlanner.Migrations
                         name: "FK_Hymn_Meeting_MeetingId",
                         column: x => x.MeetingId,
                         principalTable: "Meeting",
-                        principalColumn: "MeetingId");
+                        principalColumn: "MeetingId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,10 +56,10 @@ namespace SacramentMeetingPlanner.Migrations
                 {
                     TalkId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MeetingId = table.Column<int>(type: "int", nullable: false),
-                    TalkType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpeakerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Topic = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TalkType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpeakerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Topic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MeetingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
